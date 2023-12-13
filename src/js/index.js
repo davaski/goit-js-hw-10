@@ -15,6 +15,7 @@ fetchBreeds()
   .then(({ data }) => {
     const options = createOptions(data);
     refs.selected.innerHTML = options;
+    refs.loader.classList.add('is-hidden');
     new SlimSelect({
       select: refs.selected,
     });
@@ -25,7 +26,7 @@ fetchBreeds()
     Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
   })
   .finally(() => {
-    refs.loader.classList.remove('is-hidden');
+    refs.loader.classList.add('is-hidden');
   });
 
 const onSelect = event => {
@@ -37,10 +38,11 @@ const onSelect = event => {
 
   fetchCatByBreed(breedId)
     .then(response => {
-      const markap = createMarkap(response[0]);
+      const markap = createMarkap(response.data[0]);
       console.log(markap);
       refs.info.innerHTML = markap;
     })
+
     .catch(error => {
       Notify.failure(`Oops! Something went wrong! Try reloading the page!`);
     })

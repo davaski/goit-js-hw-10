@@ -14,5 +14,5 @@ export function fetchCatByBreed(breedId) {
   const END_POINT = '/images/search';
   const PARAMS = new URLSearchParams({ breed_ids: breedId });
   const url = `${BASE_URL}${END_POINT}?${PARAMS}`;
-  return axios.get(url).then(response => response.data);
+  return axios.get(url);
 }
